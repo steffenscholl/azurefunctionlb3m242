@@ -26,14 +26,16 @@ namespace FunctionLB3
 
         [FunctionName("MyHttpTrigger")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
             ILogger log)
         {
+             
+
             var request = new HttpRequestMessage(HttpMethod.Get,
-            "https://api.github.com/repos/facebook/react/branches");
+            $"https://api.github.com/repos/facebook/react/branches");
             request.Headers.Add("Accept", "application/vnd.github.v3+json");
             request.Headers.Add("User-Agent", "M242-IoTKitV3");
-            var response =  _client.SendAsync(request);
+            var response = _client.SendAsync(request);
 
 
             if (response.Result.IsSuccessStatusCode)
